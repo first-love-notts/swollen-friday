@@ -66,6 +66,8 @@
 		text-align: center;
 	}
 
+	#video, #details { min-height: auto; padding: clamp(56px, 12vh, 120px) 24px; }
+
 	/* Hero */
 	.brand {
 		display: flex;
@@ -83,7 +85,7 @@
 		font-family: "Bowlby One", "Archivo", sans-serif;
 		font-weight: 400;
 		line-height: 0.92;
-		font-size: clamp(3.4rem, 15.5vw, 11rem);
+		font-size: clamp(3.4rem, 15.5vw, 15rem);
 	}
 	.word { display: flex; justify-content: center; }
 	.word + .word { margin-top: 0.04em; margin-left: 0.2em; }
@@ -124,10 +126,25 @@
 	.scroll-hint span { display: block; width: 14px; height: 14px; border-right: 3px solid var(--yellow); border-bottom: 3px solid var(--yellow); transform: rotate(45deg); animation: nudge 1.6s ease-in-out infinite; }
 	@keyframes nudge { 50% { transform: rotate(45deg) translate(4px, 4px); } }
 
+	.when {
+		margin: clamp(18px, 3.5vh, 36px) 0 0;
+		padding: 0.35em 1em;
+		font-size: clamp(1.3rem, 4.6vw, 2.6rem);
+		line-height: 1.1;
+		color: var(--ink);
+		background: var(--yellow);
+		border: 4px solid var(--ink);
+		border-radius: 6px;
+		transform: rotate(-2deg);
+		box-shadow: 6px 6px 0 var(--red);
+		max-width: 22ch;
+		text-transform: uppercase;
+	}
+
 	/* Video */
 	.video-frame {
 		position: relative;
-		width: min(100%, 980px);
+		width: min(100%, 1100px);
 		aspect-ratio: 16 / 9;
 		background: var(--ink);
 		border: 5px solid var(--ink);
@@ -138,7 +155,7 @@
 	}
 	.video-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
 	.video-frame.empty::after {
-		content: "Add your video file as swollen-sunday.mp4 next to this page";
+		content: "Add your video file as swollen-friday.mp4 next to this page";
 		position: absolute; inset: 0;
 		display: grid; place-items: center;
 		padding: 24px;
@@ -161,15 +178,29 @@
 	.sound:focus-visible, .btn:focus-visible { outline: 3px solid var(--cream); outline-offset: 3px; }
 
 	/* Details */
-	.time {
-		font-size: clamp(4rem, 16vw, 9rem);
-		line-height: 1;
-		color: var(--yellow);
+	.info {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: clamp(24px, 5vw, 64px);
+		align-items: center;
+		width: min(100%, 1150px);
+	}
+	.date {
+		margin: 0;
+		font-size: clamp(2.6rem, 9vw, 6.8rem);
+		line-height: 0.95;
 		letter-spacing: -0.04em;
-		margin: 0 0 0.1em;
+		text-transform: uppercase;
+	}
+	.time {
+		font-size: clamp(5rem, 20vw, 12rem);
+		line-height: 0.9;
+		color: var(--yellow);
+		letter-spacing: -0.05em;
+		margin: 0.05em 0 0;
 	}
 	.venue {
-		font-size: clamp(2rem, 7.5vw, 4.6rem);
+		font-size: clamp(2rem, 6.5vw, 4.6rem);
 		line-height: 1;
 		letter-spacing: -0.03em;
 		text-transform: uppercase;
@@ -189,6 +220,10 @@
 		transition: transform 0.15s ease, box-shadow 0.15s ease;
 	}
 	.btn:hover { transform: translate(3px, 3px); box-shadow: 3px 3px 0 var(--red); }
+	@media (min-width: 860px) {
+		.info { grid-template-columns: 1.1fr 1fr; text-align: left; }
+		.venue { border-left: 6px solid var(--yellow); padding-left: clamp(20px, 3vw, 40px); }
+	}
 
 	/* Travel bar, same as the flyer's yellow strip */
 	.travel {
@@ -221,24 +256,31 @@
 		<span class="word" aria-hidden="true" id="w1"></span>
 		<span class="word" aria-hidden="true" id="w2"></span>
 	</h1>
+	<p class="when">Nottingham's biggest event is back!</p>
 	<a class="scroll-hint" href="#video">Scroll<span></span></a>
 </section>
 
 <section id="video">
 	<div class="video-frame" id="frame">
-		<video id="vid" muted loop playsinline preload="auto" aria-label="Swollen Sunday video">
-			<source src="swollen-sunday.mp4" type="video/mp4">
+		<video id="vid" muted loop playsinline preload="auto" aria-label="Swollen Friday video">
+			<source src="swollen-friday.mp4" type="video/mp4">
 		</video>
 		<button class="sound" id="sound" type="button" aria-pressed="false">Sound on</button>
 	</div>
 </section>
 
 <section id="details">
-	<!-- Time and venue are copied from the Swollen Friday flyer. Change them if Sunday differs. -->
-	<p class="time">7PM</p>
-	<p class="date">20th November</p>
-	<p class="venue">Excelsior Nawaab<br>5-7 Lortas Rd,<br>NG5 1EL</p>
-	<a class="btn" href="https://www.instagram.com/firstlovenotts/" target="_blank" rel="noopener noreferrer">More info</a>
+	<!-- Time and venue are copied from the flyer -->
+	<div class="info">
+		<div>
+			<p class="date">Friday<br>20th November</p>
+			<p class="time">7PM</p>
+		</div>
+		<div>
+			<p class="venue">Excelsior Nawaab<br>5-7 Lortas Rd,<br>NG5 1EL</p>
+			<a class="btn" href="https://www.instagram.com/firstlovenotts/" target="_blank" rel="noopener noreferrer">More info</a>
+		</div>
+	</div>
 </section>
 
 <footer class="travel">Nearest stop: Zulu Rd<br>Buses: 68, 69</footer>
@@ -247,7 +289,7 @@
 	// Build the 3D lettering: [letter, colour class, rotation, vertical offset]
 	const words = {
 		w1: [["S","cream",-6,"0"],["W","blue",4,"-0.04em"],["O","orange",-3,"0.03em"],["L","cream",5,"-0.03em"],["L","teal",-4,"0.02em"],["E","red",3,"-0.02em"],["N","yellow",-5,"0.03em"]],
-		w2: [["S","teal",-5,"0.02em"],["U","yellow",4,"-0.03em"],["N","red",-3,"0.03em"],["D","blue",5,"-0.02em"],["A","cream",-4,"0.03em"],["Y","orange",6,"-0.03em"]]
+		w2: [["F","teal",-5,"0.02em"],["R","yellow",4,"-0.03em"],["I","red",-3,"0.03em"],["D","blue",5,"-0.02em"],["A","cream",-4,"0.03em"],["Y","orange",6,"-0.03em"]]
 	};
 	let n = 0;
 	for (const id in words) {
